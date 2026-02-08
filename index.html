@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Happy Birthday ❤️</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      overflow: hidden;
+      background: linear-gradient(#ff9a9e, #fad0c4);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Segoe UI', sans-serif;
+      color: white;
+    }
+
+    .box {
+      position: relative;
+      background: rgba(255,255,255,0.18);
+      padding: 30px;
+      border-radius: 20px;
+      width: 85%;
+      max-width: 420px;
+      text-align: center;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+      z-index: 2;
+    }
+
+    #text {
+      min-height: 120px;
+      margin: 20px 0;
+      font-size: 16px;
+    }
+
+    button {
+      background: white;
+      color: #ff4d6d;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 25px;
+      font-size: 15px;
+      cursor: pointer;
+      margin: 5px;
+    }
+
+    #secret {
+      display: none;
+      margin-top: 15px;
+      font-size: 18px;
+      animation: fadeIn 1.5s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.8); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    /* LOVE JATUH */
+    .heart {
+      position: absolute;
+      top: -20px;
+      font-size: 20px;
+      animation: fall linear infinite;
+      opacity: 0.8;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(110vh);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="box">
+  <h1>🎂 Happy Birthday 🎂</h1>
+
+  <div id="text"></div>
+
+  <button onclick="playMusic()">Putar Lagu 🎶</button>
+  <button onclick="showSecret()">🎁 Kejutan Rahasia</button>
+
+  <div id="secret">
+    🤗🤍🤗 <br>
+    Peluk jauh tapi hangat buat kamu <br>
+    Aku sayang kamu 💖
+  </div>
+
+  <audio id="music">
+    <source src="lagu.mp3" type="audio/mpeg">
+  </audio>
+</div>
+
+<script>
+  /* TEKS MUNCUL SATU-SATU */
+  const message = "Ciyeee yang hari ini ulang tahun... Semoga di hari bertambahnya usia kamu ini, kamu bisa menjadi pribadi yang lebih baik lagi yaa. Semangat terus jalani harinya, jangan pernah menyerah ngejar impian kamu. Aku selalu dukung dan support kamu. Semoga usia baru ini penuh keberkahan. HAPPY BIRTHDAY ❤️";
+  let i = 0;
+  function typeText() {
+    if (i < message.length) {
+      document.getElementById("text").innerHTML += message.charAt(i);
+      i++;
+      setTimeout(typeText, 45);
+    }
+  }
+
+  /* MUSIK */
+  function playMusic() {
+    document.getElementById("music").play();
+  }
+
+  /* KEJUTAN */
+  function showSecret() {
+    document.getElementById("secret").style.display = "block";
+  }
+
+  /* LOVE JATUH */
+  function createHeart() {
+    const heart = document.createElement("div");
+    heart.classList.add("heart");
+    heart.innerHTML = "❤️";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.animationDuration = (3 + Math.random() * 3) + "s";
+    document.body.appendChild(heart);
+
+    setTimeout(() => {
+      heart.remove();
+    }, 6000);
+  }
+
+  setInterval(createHeart, 300);
+  window.onload = typeText;
+</script>
+
+</body>
+</html>
